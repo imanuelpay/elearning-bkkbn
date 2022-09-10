@@ -1,13 +1,17 @@
 <?php
 
+require_once 'config.php';
+require_once 'helpers.php';
+
 class Database
 {
-    private $host = DB_HOST;
-    private $dbname = DB_NAME;
-    private $username = DB_USER;
-    private $password = DB_PASS;
+    public mysqli|string $mysqli = '';
+    public $sql;
+    private string $host = DB_HOST;
+    private string $dbname = DB_NAME;
+    private string $username = DB_USER;
+    private string $password = DB_PASS;
     private $result = array();
-    public $mysqli = '';
 
     public function __construct()
     {
@@ -27,7 +31,7 @@ class Database
         $this->mysqli->query("SET time_zone = '$offset'");
     }
 
-    public function insert($table, $param = array())
+    public function insert($table, $param = array()): void
     {
         $args = array();
         $table_columns = implode(', ', array_keys($param));
@@ -36,20 +40,20 @@ class Database
             $args[] = ($value == '' ? "NULL" : "'$value'");
         }
 
-        $table_value = implode(', ', mysqli_real_escape_string($this->mysqli, $args));
+        $table_value = implode(', ', $args);
         $sql = "INSERT INTO $table ($table_columns) VALUES($table_value)";
 
         $this->result = $this->mysqli->query($sql);
     }
 
-    public function update($table, $param = array(), $id)
+    public function update($table, $param = array(), $id): void
     {
         $args = array();
         foreach ($param as $key => $value) {
             $args[] = $key . '=' . ($value == '' ? "NULL" : "'$value'");
         }
 
-        $sql = "UPDATE $table SET " . implode(', ', mysqli_real_escape_string($this->mysqli, $args));
+        $sql = "UPDATE $table SET " . implode(', ', $args);
         $sql .= " WHERE $id";
 
         $this->result = $this->mysqli->query($sql);
@@ -64,7 +68,6 @@ class Database
         $this->result = $this->mysqli->query($sql);
     }
 
-    public $sql;
     public function select($table, $rows = "*", $where = null)
     {
         if ($where != null) {
@@ -73,7 +76,7 @@ class Database
             $sql = "SELECT $rows FROM $table";
         }
 
-        $this->sql = $this->result = $this->mysqli->query($sql);
+        $this->sql = $this->mysqli->query($sql);
     }
 
     public function select_custom($table, $rows = "*", $query = null)
@@ -84,7 +87,7 @@ class Database
             $sql = "SELECT $rows FROM $table";
         }
 
-        $this->sql = $this->result = $this->mysqli->query($sql);
+        $this->sql = $this->mysqli->query($sql);
     }
 
     public function __destruct()
