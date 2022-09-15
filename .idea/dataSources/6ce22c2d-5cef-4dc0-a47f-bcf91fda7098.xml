@@ -1325,11 +1325,11 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Position>7</Position>
     </column>
     <column id="369" parent="338" name="created_by">
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <Position>8</Position>
     </column>
     <column id="370" parent="338" name="updated_by">
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <Position>9</Position>
     </column>
     <column id="371" parent="338" name="created_at">
@@ -1430,7 +1430,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Position>8</Position>
     </column>
     <column id="391" parent="340" name="created_by">
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <Position>9</Position>
     </column>
     <column id="392" parent="340" name="created_at">

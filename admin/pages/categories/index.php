@@ -16,33 +16,11 @@ $total_page = ceil($total_data / $limit);
 $a->select_custom(
     'categories',
     '*',
-    "ORDER BY  name DESC LIMIT $page_start, $limit"
+    "ORDER BY name LIMIT $page_start, $limit"
 );
 
 $result = $a->sql;
 
-if (isset($_POST['save'])) {
-    $request = $_POST;
-    unset($request['save']);
-
-    $request['name'] = cleanData($request['name']);
-    $request['slug'] = textToSlug($request['name']);
-
-    $db = new Database();
-    $db->insert('categories', $request);
-
-    echo $db->mysqli->affected_rows;
-    if ($db->mysqli->affected_rows == 1) {
-        $_SESSION['success_msg'] = '<div class="col-lg-12">
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <i class="fa fa-check"></i> <strong>Berhasil tersimpan!</strong> Category ' . $request['name'] . ' berhasil ditambahkan.
-            </div>
-        </div>';
-
-        echo("<script>location.href='$baseURL/admin/?page=categories';</script>");
-    }
-}
 
 if ((isset($_GET['edit']) && isset($_GET['id']))) {
     $id = $_GET['id'];
@@ -50,47 +28,6 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
     $db = new Database();
     $db->select('categories', '*', "id='$id'");
     $category = mysqli_fetch_array($db->sql);
-}
-
-if (isset($_POST['edit'])) {
-    $request = $_POST;
-    unset($request['edit']);
-
-    $db = new Database();
-    $db->update('categories', $request, "id='$id'");
-
-    echo $db->mysqli->affected_rows;
-    if ($db->mysqli->affected_rows == 1) {
-        $_SESSION['success_msg'] = '<div class="col-lg-12">
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <i class="fa fa-check"></i> <strong>Berhasil tersimpan!</strong> Category ' . $request['name'] . ' berhasil diubah.
-            </div>
-        </div>';
-
-        echo("<script>location.href='$baseURL/admin/?page=categories';</script>");
-    }
-}
-
-if (isset($_GET['delete']) && isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    $db = new Database();
-    $db->select('categories', '*', "id=$id");
-    $result = mysqli_fetch_array($db->sql);
-
-    $db->delete('categories', "id=$id");
-
-    if ($db->mysqli->affected_rows == 1) {
-        $_SESSION['success_msg'] = '<div class="col-lg-12">
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <i class="fa fa-check"></i> <strong>Berhasil terhapus!</strong> Category ' . $result['name'] . ' berhasil dihapus.
-            </div>
-        </div>';
-
-        echo("<script>location.href='$baseURL/admin/?page=categories';</script>");
-    }
 }
 ?>
 <div class="main-content">
@@ -115,11 +52,12 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
 
             <div class="row mt-4">
                 <div class="card col-md-4 col-sm-12">
-                    <form method="post">
+                    <form action="?page=category-action" method="post">
                         <div class="card-header">
                             <h4><?= (isset($_GET['edit']) && isset($_GET['id'])) ? 'Edit ' : 'Add ' ?> Category</h4>
                         </div>
                         <div class="card-body">
+                            <?= (isset($_GET['edit'])) ? '<input type="hidden" name="id" value="' . $id . '">' : '' ?>
                             <div class="form-group">
                                 <label>Category Name</label>
                                 <input type="text" name="name"
@@ -131,7 +69,8 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio1" name="status"
                                            class="custom-control-input"
-                                           value="1" <?= (isset($_GET['edit']) && $category['status'] == '1') ? 'checked' : 'checked' ?>>
+                                           value="1" <?= (isset($_GET['edit']) && $category['status'] == '1') ? 'checked' : '' ?>
+                                           checked>
                                     <label class="custom-control-label" for="customRadio1">Active</label>
                                 </div>
                                 <div class="custom-control custom-radio">
@@ -192,9 +131,9 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
                                                                 class="fa fa-edit"></i>Edit</a>
                                                     <a href="#modalDelete" class="text-danger" data-toggle="modal"
                                                        data-target="#modalDelete" onclick="
-                                                            $('#modalDelete #linkDelete').attr('href', '<?= $baseURL ?>/admin/?page=categories&id=<?= $category['id'] ?>&delete');
+                                                            $('#modalDelete #linkDelete').attr('href', '<?= $baseURL ?>/admin/?page=category-action&id=<?= $category['id'] ?>&delete');
                                                             $('#modalDelete #modalDeleteLabel').text('Apakah anda yakin?');
-                                                            $('#modalDelete #bodyDelete #deleteTitle').text('Anda ingin menghapus Rombel <?= $category['name'] ?> secara permanen?');">
+                                                            $('#modalDelete #bodyDelete #deleteTitle').text('Anda ingin menghapus Category <?= $category['name'] ?> secara permanen?');">
                                                         <i class="fa fa-trash"></i>
                                                         Trash</a>
                                                 </div>
@@ -242,26 +181,4 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
             </div>
         </div>
     </section>
-</div>
-
-<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalDeleteLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="bodyDelete">
-                <label id="deleteTitle"></label>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-remove"></i> Batal
-                </button>
-                <a href="" class="btn btn-danger" id="linkDelete"><i class="fa fa-trash-o"></i> Hapus</a>
-            </div>
-        </div>
-    </div>
 </div>

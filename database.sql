@@ -72,8 +72,8 @@ CREATE TABLE articles
     content     longtext             default null,
     status      tinyint(1)           default 0,
     thumbnail   varchar(100)         default null,
-    created_by  int(11)              default null,
-    updated_by  int(11)              default null,
+    created_by  varchar(32)          default null,
+    updated_by  varchar(32)          default null,
     created_at  timestamp   not null default current_timestamp(),
     updated_at  timestamp   null     default null on update current_timestamp(),
 
@@ -127,7 +127,7 @@ CREATE TABLE course_section_exam
     end_time          datetime             default null,
     total_question    int(3)               default null,
     status            tinyint(1)           default 0,
-    created_by        int(11)              default null,
+    created_by        varchar(32)          default null,
     created_at        timestamp   not null default current_timestamp(),
     updated_at        timestamp   null     default null on update current_timestamp(),
     foreign key (course_section_id) references course_sections (id) on update cascade on delete cascade
@@ -179,5 +179,12 @@ CREATE TABLE user_exam_enroll
     foreign key (user_id) references user (id) on update cascade on delete cascade,
     foreign key (exam_id) references course_section_exam (id) on update cascade on delete cascade
 );
+
+insert into menu
+values (null, ' Categories', 'categories', 'fa-layer-group', 1),
+       (null, ' Articles', 'articles', 'fa-file', 1);
+
+insert into menu
+values (null, ' Admin', 'admin', 'fa-user-tie', 1);
 
 drop database elearing_bkkbn;

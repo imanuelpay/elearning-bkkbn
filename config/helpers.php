@@ -1,5 +1,9 @@
 <?php
 
+use Ramsey\Uuid\Uuid;
+
+require '../vendor/autoload.php';
+
 function textToSlug(string $text = ''): string
 {
     $text = trim($text);
@@ -15,4 +19,10 @@ function cleanData(string $data): string
     $data = trim($data);
     $data = stripslashes($data);
     return htmlspecialchars($data);
+}
+
+function getUUID(): string
+{
+    $uuid4 = Uuid::uuid4();
+    return $uuid4->toString();
 }

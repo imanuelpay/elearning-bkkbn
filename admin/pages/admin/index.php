@@ -8,49 +8,40 @@ $i = $page_start + 1;
 $previous = $page - 1;
 $next = $page + 1;
 
-$query = "WHERE articles.category_id=categories.id";
+$query = "";
 
 // Search
 if (isset($_POST['search'])) {
     $search = $_POST['q'];
-    $query .= " AND articles.title LIKE '%$search%'";
+    $query .= "WHERE name LIKE '%$search%' OR username LIKE '%$search%' OR email LIKE '%$search%'";
 }
 
 // Article List
 $db = new Database();
-$db->select_custom('articles, categories', "articles.id", $query);
+$db->select_custom('admin', "admin.id", $query);
 $total_data = mysqli_num_rows($db->sql);
 $total_page = ceil($total_data / $limit);
 
 $db->select_custom(
-    'articles, categories',
-    'articles.id, articles.title, articles.slug, categories.name AS category, articles.thumbnail, articles.created_at, articles.status, created_by',
+    'admin',
+    '*',
     "$query ORDER BY created_at DESC LIMIT $page_start, $limit"
 );
 
-$articles = $db->sql;
-
-// Category List
-$db = new Database();
-$db->select_custom(
-    'categories',
-    '*',
-    "WHERE status=1"
-);
-$categories = $db->sql;
+$admin_data = $db->sql;
 ?>
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Article</h1>
+            <h1>Administrator</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item">Article</div>
+                <div class="breadcrumb-item">Administrator</div>
             </div>
         </div>
 
         <div class="section-body">
-            <h2 class="section-title">Articles</h2>
+            <h2 class="section-title">Administrator</h2>
 
             <?php
             if (isset($_SESSION['success_msg'])) {
@@ -64,7 +55,7 @@ $categories = $db->sql;
                     <div class="card">
                         <div class="card-header row">
                             <h4 class="col-md-5"><?= (isset($search)) ? 'Search ' : 'All' ?>
-                                Article <?= (isset($search)) ? ": $search" : '' ?></h4>
+                                Administrator <?= (isset($search)) ? ": $search" : '' ?></h4>
 
                             <div class="col-md-4 float-right">
                                 <form method="post">
@@ -81,14 +72,14 @@ $categories = $db->sql;
                             </div>
 
                             <div class="col-md-3 float-right">
-                                <a href="?page=articles" class="btn btn-sm btn-outline-success">
+                                <a href="?page=admin" class="btn btn-sm btn-outline-success">
                                     <i class="fa fa-rotate"></i>
                                     Refresh
                                 </a>
 
-                                <a href="?page=article-form&add" class="btn btn-sm btn-outline-primary float-right">
+                                <a href="?page=admin-form&add" class="btn btn-sm btn-outline-primary float-right">
                                     <i class="fa fa-rotate"></i>
-                                    Add Article
+                                    Add Admin
                                 </a>
                             </div>
                         </div>
@@ -97,10 +88,10 @@ $categories = $db->sql;
                                 <table class="table table-striped">
                                     <tr>
                                         <th>No</th>
-                                        <th>Thumbnail</th>
-                                        <th>Title</th>
-                                        <th>Category</th>
-                                        <th>Author</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Username</th>
                                         <th>Created At</th>
                                         <th>Status</th>
                                     </tr>
@@ -111,45 +102,41 @@ $categories = $db->sql;
                                         echo '<td class="text-center" colspan="15"><i>Data tidak ditemukan...</i></td>';
                                     }
 
-                                    while ($article = mysqli_fetch_array($articles)) {
-                                    $time = strtotime($article['created_at']);
+                                    while ($admin = mysqli_fetch_array($admin_data)) {
+                                    $time = strtotime($admin['created_at']);
                                     ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td>
-                                            <div class="gallery">
+                                            <div class="gallery circle">
                                                 <div class="gallery-item"
-                                                     data-image="../public/images/article/<?= $article['thumbnail'] ?>"
-                                                     data-title="<?= $article['slug'] ?>"></div>
+                                                     data-image="../public/images/admin/<?= $admin['photo'] ?>"
+                                                     data-title="<?= $admin['username'] ?>"></div>
                                             </div>
                                         </td>
-                                        <td><?= $article['title'] ?>
+                                        <td><?= $admin['name'] ?>
                                             <div class="table-links">
-                                                <a href="?page=article-form&id=<?= $article['id'] ?>&edit"
+                                                <a href="?page=admin-form&id=<?= $admin['id'] ?>&edit"
                                                    class="text-warning mr-3"> <i
                                                             class="fa fa-edit"></i>Edit</a>
                                                 <a href="#modalDelete" class="text-danger" data-toggle="modal"
                                                    data-target="#modalDelete" onclick="
-                                                        $('#modalDelete #linkDelete').attr('href', '<?= $baseURL ?>/admin/?page=article-action&id=<?= $article['id'] ?>&delete');
+                                                        $('#modalDelete #linkDelete').attr('href', '<?= $baseURL ?>/admin/?page=admin-action&id=<?= $admin['id'] ?>&delete');
                                                         $('#modalDelete #modalDeleteLabel').text('Apakah anda yakin?');
-                                                        $('#modalDelete #bodyDelete #deleteTitle').text('Anda ingin menghapus Article <?= $article['title'] ?> secara permanen?');">
+                                                        $('#modalDelete #bodyDelete #deleteTitle').text('Anda ingin menghapus Admin <?= $admin['name'] ?> secara permanen?');">
                                                     <i class="fa fa-trash"></i>
                                                     Trash</a>
                                             </div>
                                         </td>
                                         <td>
-                                            <?= $article['category'] ?>
+                                            <?= $admin['email'] ?>
                                         </td>
                                         <td>
-                                            <a href="#">
-                                                <img alt="image" src="../assets/img/avatar/avatar-5.png"
-                                                     class="rounded-circle" width="35" data-toggle="title" title="">
-                                                <div class="d-inline-block ml-1"><?= $article['created_by'] ?></div>
-                                            </a>
+                                            <?= $admin['username'] ?>
                                         </td>
                                         <td><?= date('d/m/Y h:i:s', $time) ?></td>
                                         <td>
-                                            <?= ($article['status'] == 1) ? '<div class="badge badge-success">Active</div>' : '<span class="badge badge-danger">Inactive</span>' ?>
+                                            <?= ($admin['status'] == 1) ? '<div class="badge badge-success">Active</div>' : '<span class="badge badge-danger">Inactive</span>' ?>
                                         </td>
                                     <tr>
                                         <?php } ?>

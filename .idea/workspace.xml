@@ -5,30 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c2cf61c-1d2c-4eb7-98d4-4db1a030696c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/login_process.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/admin/action.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/admin/form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/admin/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/articles/action.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/articles/form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/categories/action.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/layouts/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/layouts/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/layouts/navbar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/layouts/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/layouts/sidebar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/articles/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/articles/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/categories/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/categories/action.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/categories/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/categories/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/errors/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/errors/404.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/home/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/home/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/helpers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/platform_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/platform_check.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +82,12 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\e-learning\admin" />
+      <recent name="C:\xampp\htdocs\e-learning\admin\layouts" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -106,7 +107,11 @@
       <workItem from="1662359595516" duration="1403000" />
       <workItem from="1662465437982" duration="4825000" />
       <workItem from="1662687332989" duration="8042000" />
-      <workItem from="1662767793645" duration="4928000" />
+      <workItem from="1662767793645" duration="7476000" />
+      <workItem from="1662861054651" duration="9048000" />
+      <workItem from="1662950345724" duration="11517000" />
+      <workItem from="1663151771129" duration="14183000" />
+      <workItem from="1663200855008" duration="946000" />
     </task>
     <servers />
   </component>

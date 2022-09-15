@@ -2,6 +2,16 @@
 require_once '../config/database.php';
 session_start();
 
+$baseURL = base_url;
+if (!isset($_SESSION['login_admin'])) {
+    echo("<script>location.href='$baseURL/admin/login.php';</script>");
+}
+
+if (isset($_GET['logout_admin'])) {
+    session_destroy();
+    echo("<script>location.href='$baseURL/admin/login.php';</script>");
+}
+
 $db = new Database();
 $db->select('menu', '*', 'status=1');
 $result_menu = [];
@@ -9,8 +19,11 @@ while ($row = mysqli_fetch_array($db->sql)) {
     $result_menu[] = $row;
 }
 
-$baseURL = base_url;
+$db = new Database();
+$db->select('admin', '*', "id='{$_SESSION['admin_id']}'");
+$adminLogin = mysqli_fetch_array($db->sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,18 +35,18 @@ $baseURL = base_url;
     <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
 
+    <!-- CSS Libraries -->
     <?php
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
 
-        if ($page == 'article') {
-            echo '  <!-- CSS Libraries -->
-  <link rel="stylesheet" href="assets/modules/bootstrap-daterangepicker/daterangepicker.css">
-  <link rel="stylesheet" href="assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
-  <link rel="stylesheet" href="assets/modules/select2/dist/css/select2.min.css">
-  <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css">
-  <link rel="stylesheet" href="assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
-  <link rel="stylesheet" href="assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">';
+        if ($page == 'articles' || $page == 'admin') {
+            echo '<link rel="stylesheet" href="../assets/modules/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="../assets/modules/chocolat/dist/css/chocolat.css">';
+        } elseif ($page == 'article-form' || $page == 'admin-form') {
+            echo '<link rel="stylesheet" href="../assets/modules/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="../assets/modules/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="../assets/modules/chocolat/dist/css/chocolat.css">';
         }
     }
     ?>
@@ -75,10 +88,69 @@ $baseURL = base_url;
                     include $path;
                 }
             }
+
+            if ($page == 'category-action') {
+                include './pages/categories/action.php';
+            } elseif ($page == 'article-action') {
+                include './pages/articles/action.php';
+            } elseif ($page == 'article-form') {
+                include './pages/articles/form.php';
+            } elseif ($page == 'admin-action') {
+                include './pages/admin/action.php';
+            } elseif ($page == 'admin-form') {
+                include './pages/admin/form.php';
+            }
         } else {
             include './pages/home/index.php';
         }
         ?>
+
+        <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="bodyDelete">
+                        <label id="deleteTitle"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fa fa-remove"></i> Batal
+                        </button>
+                        <a href="" class="btn btn-danger" id="linkDelete"><i class="fa fa-trash-o"></i> Hapus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="modalLogoutLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLogoutLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="bodyLogout">
+                        <label id="logoutTitle"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fa fa-remove"></i>
+                            Batal
+                        </button>
+                        <a href="" class="btn btn-danger" id="linkLogout"><i class="fa fa-sign-out"></i> Keluar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <?php require_once './layouts/footer.php' ?>
     </div>
@@ -93,26 +165,31 @@ $baseURL = base_url;
 <script src="../assets/modules/moment.min.js"></script>
 <script src="../assets/js/stisla.js"></script>
 
+<!-- JS Libraies -->
 <?php
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 
-    if ($page == 'article') {
-        echo '  <!-- JS Libraies -->
-  <script src="../assets/modules/cleave-js/dist/cleave.min.js"></script>
-  <script src="../assets/modules/cleave-js/dist/addons/cleave-phone.us.js"></script>
-  <script src="../assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  <script src="../assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
-  <script src="../assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-  <script src="../assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-  <script src="../assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-  <script src="../assets/modules/select2/dist/js/select2.full.min.js"></script>
-  <script src="../assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
-  <script src="../assets/modules/sweetalert/sweetalert.min.js"></script>
-
-  <!-- Page Specific JS File -->
-  <script src="../assets/js/page/forms-advanced-forms.js"></script>
-  ';
+    if ($page == 'articles' || $page == 'admin') {
+        echo '<script src="../assets/modules/select2/dist/js/select2.full.min.js"></script>
+<script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>';
+    } elseif ($page == 'article-form' || $page == 'admin-form') {
+        echo '<script src="../assets/modules/summernote/summernote-bs4.js"></script>
+          <script src="../assets/modules/select2/dist/js/select2.full.min.js"></script>
+          <script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+          <script src="../assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
+          <script>
+          "use strict";
+        $.uploadPreview({
+          input_field: "#image-upload",   // Default: .image-upload
+          preview_box: "#image-preview",  // Default: .image-preview
+          label_field: "#image-label",    // Default: .image-label
+          label_default: "Choose File",   // Default: Choose File
+          label_selected: "Change File",  // Default: Change File
+          no_label: false,                // Default: false
+          success_callback: null          // Default: null
+        });
+        </script>';
     }
 }
 ?>

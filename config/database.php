@@ -59,7 +59,7 @@ class Database
         $this->result = $this->mysqli->query($sql);
     }
 
-    public function delete($table, $id)
+    public function delete($table, $id): void
     {
         $sql = "DELETE FROM $table";
         $sql .= " WHERE $id ";
@@ -68,7 +68,7 @@ class Database
         $this->result = $this->mysqli->query($sql);
     }
 
-    public function select($table, $rows = "*", $where = null)
+    public function select($table, $rows = "*", $where = null): void
     {
         if ($where != null) {
             $sql = "SELECT $rows FROM $table WHERE $where";
@@ -79,14 +79,14 @@ class Database
         $this->sql = $this->mysqli->query($sql);
     }
 
-    public function select_custom($table, $rows = "*", $query = null)
+    public function select_custom($table, $rows = "*", $query = null): void
     {
         if ($query != null) {
             $sql = "SELECT $rows FROM $table $query";
         } else {
             $sql = "SELECT $rows FROM $table";
         }
-
+//        echo $sql;
         $this->sql = $this->mysqli->query($sql);
     }
 
