@@ -1,7 +1,7 @@
 <!--====== SLIDER PART START ======-->
 
 <section id="slider-part" class="slider-active">
-    <div class="single-slider slider-2 bg_cover" style="background-image: url(./assets/user/images/slider/s-2.jpg)"
+    <div class="single-slider slider-2 bg_cover" style="background-image: url(../assets/user/images/slider/s-2.jpg)"
          data-overlay="4">
         <div class="container">
             <div class="row">
@@ -16,7 +16,7 @@
         </div> <!-- container -->
     </div> <!-- single slider -->
 
-    <div class="single-slider slider-2 bg_cover" style="background-image: url(./assets/user/images/slider/s-3.jpg)"
+    <div class="single-slider slider-2 bg_cover" style="background-image: url(../assets/user/images/slider/s-3.jpg)"
          data-overlay="4">
         <div class="container">
             <div class="row">
@@ -31,7 +31,7 @@
         </div> <!-- container -->
     </div> <!-- single slider -->
 
-    <div class="single-slider slider-2 bg_cover" style="background-image: url(./assets/user/images/slider/s-1.jpg)"
+    <div class="single-slider slider-2 bg_cover" style="background-image: url(../assets/user/images/slider/s-1.jpg)"
          data-overlay="4">
         <div class="container">
             <div class="row">

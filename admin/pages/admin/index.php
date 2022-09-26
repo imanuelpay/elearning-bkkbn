@@ -19,7 +19,7 @@ if (isset($_POST['search'])) {
 // Article List
 $db = new Database();
 $db->select_custom('admin', "admin.id", $query);
-$total_data = mysqli_num_rows($db->sql);
+$total_data = mysqli_num_rows($db->result);
 $total_page = ceil($total_data / $limit);
 
 $db->select_custom(
@@ -28,7 +28,7 @@ $db->select_custom(
     "$query ORDER BY created_at DESC LIMIT $page_start, $limit"
 );
 
-$admin_data = $db->sql;
+$admin_data = $db->result;
 ?>
 <div class="main-content">
     <section class="section">

@@ -1,9 +1,17 @@
 <section id="contact-page" class="pt-30 pb-50 gray-bg">
     <div class="container">
-        <form method="post" action="?halaman=action-daftar-akun" data-toggle="validator">
+        <form method="post" action="?halaman=action-auth" data-toggle="validator">
             <div class="row">
+
+                <?php
+                if (isset($_SESSION['success_msg'])) {
+                    echo $_SESSION['success_msg'];
+                    unset($_SESSION['success_msg']);
+                }
+                ?>
+
                 <div class="col-lg-6">
-                    <div class="contact-from mt-30">
+                    <div class="contact-from mt-20">
                         <div class="section-title">
                             <h5>Daftar Akun</h5>
                             <h2>Data Diri</h2>
@@ -84,7 +92,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="contact-from mt-30">
+                    <div class="contact-from mt-20">
                         <div class="section-title">
                             <h5>Daftar Akun</h5>
                             <h2>Informasi Akun</h2>
@@ -93,7 +101,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="singel-form form-group">
-                                        <input name="name" type="text" placeholder="Nama Pengguna"
+                                        <input name="username" type="text" placeholder="Nama Pengguna"
                                                data-error="Nama Pengguna harus di isi." required="required">
                                         <div class="help-block with-errors"></div>
                                     </div> <!-- singel form -->

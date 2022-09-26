@@ -26,3 +26,16 @@ function getUUID(): string
     $uuid4 = Uuid::uuid4();
     return $uuid4->toString();
 }
+
+function randomString(int $lenght): string
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $lenght; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+
+    return $randomString;
+}

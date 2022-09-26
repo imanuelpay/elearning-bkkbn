@@ -8,7 +8,7 @@ $i = $page_start + 1;
 $previous = $page - 1;
 $next = $page + 1;
 
-$query = "WHERE articles.category_id=categories.id";
+$query = "WHERE articles.category_id=categories.id AND articles.created_by=admin.id";
 
 // Search
 if (isset($_POST['search'])) {
@@ -18,17 +18,17 @@ if (isset($_POST['search'])) {
 
 // Article List
 $db = new Database();
-$db->select_custom('articles, categories', "articles.id", $query);
-$total_data = mysqli_num_rows($db->sql);
+$db->select_custom('articles, categories, admin', "articles.id", $query);
+$total_data = mysqli_num_rows($db->result);
 $total_page = ceil($total_data / $limit);
 
 $db->select_custom(
-    'articles, categories',
-    'articles.id, articles.title, articles.slug, categories.name AS category, articles.thumbnail, articles.created_at, articles.status, created_by',
+    'articles, categories, admin',
+    'articles.id, articles.title, articles.slug, categories.name AS category, articles.thumbnail, articles.created_at, articles.status, admin.name AS created_by, admin.photo AS avatar',
     "$query ORDER BY created_at DESC LIMIT $page_start, $limit"
 );
 
-$articles = $db->sql;
+$articles = $db->result;
 
 // Category List
 $db = new Database();
@@ -37,7 +37,7 @@ $db->select_custom(
     '*',
     "WHERE status=1"
 );
-$categories = $db->sql;
+$categories = $db->result;
 ?>
 <div class="main-content">
     <section class="section">
@@ -141,11 +141,9 @@ $categories = $db->sql;
                                             <?= $article['category'] ?>
                                         </td>
                                         <td>
-                                            <a href="#">
-                                                <img alt="image" src="../assets/img/avatar/avatar-5.png"
-                                                     class="rounded-circle" width="35" data-toggle="title" title="">
-                                                <div class="d-inline-block ml-1"><?= $article['created_by'] ?></div>
-                                            </a>
+                                            <img alt="image" src="../public/images/admin/<?= $article['avatar'] ?>"
+                                                 class="rounded-circle" width="35" data-toggle="title" title="">
+                                            <div class="d-inline-block ml-1"><?= $article['created_by'] ?></div>
                                         </td>
                                         <td><?= date('d/m/Y h:i:s', $time) ?></td>
                                         <td>

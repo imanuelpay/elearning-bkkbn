@@ -20,9 +20,23 @@ if (isset($_POST['add'])) {
         $request['photo'] = $file;
     }
 
+    // Check Duplicate
+    $db = new Database();
+    $db->select('admin', '*', "username='{$request['username']}' OR email='{$request['email']}'");
+    if ($db->mysqli->affected_rows >= 1) {
+        $_SESSION['success_msg'] = '<div class="col-lg-12">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="fa fa-check"></i> <strong>Gagal tersimpan!</strong> Administrator ' . $request['name'] . ' sudah ada.
+            </div>
+        </div>';
+
+        echo("<script>location.href='$baseURL/admin/?page=admin';</script>");
+    }
+
+    // Insert Data
     $db = new Database();
     $db->insert('admin', $request);
-
     if ($db->mysqli->affected_rows >= 1) {
         $_SESSION['success_msg'] = '<div class="col-lg-12">
             <div class="alert alert-success alert-dismissible" role="alert">
@@ -48,7 +62,7 @@ if (isset($_POST['edit'])) {
 
     $db = new Database();
     $db->select('admin', '*', "id='$id'");
-    $admin = mysqli_fetch_array($db->sql);
+    $admin = mysqli_fetch_array($db->result);
 
     if ($request['password'] != '') {
         $request['password'] = password_hash(cleanData($request['password']), PASSWORD_DEFAULT);
@@ -72,6 +86,21 @@ if (isset($_POST['edit'])) {
         $request['photo'] = $file;
     }
 
+    // Check Duplicate
+    $db = new Database();
+    $db->select('admin', '*', "username='{$request['username']}' OR email='{$request['email']}'");
+    if ($db->mysqli->affected_rows >= 1) {
+        $_SESSION['success_msg'] = '<div class="col-lg-12">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="fa fa-check"></i> <strong>Gagal tersimpan!</strong> Administrator ' . $request['name'] . ' sudah ada.
+            </div>
+        </div>';
+
+        echo("<script>location.href='$baseURL/admin/?page=admin';</script>");
+    }
+
+    // Update Data
     $db = new Database();
     $db->update('admin', $request, "id='$id'");
 
@@ -92,7 +121,7 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
 
     $db = new Database();
     $db->select('admin', '*', "id='$id'");
-    $result = mysqli_fetch_array($db->sql);
+    $result = mysqli_fetch_array($db->result);
 
     $db->delete('admin', "id='$id'");
 

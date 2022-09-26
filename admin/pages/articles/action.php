@@ -21,6 +21,20 @@ if (isset($_POST['add'])) {
         $request['thumbnail'] = $file;
     }
 
+    // Check Duplicate
+    $db = new Database();
+    $db->select('articles', '*', "title='{$request['title']}' OR slug='{$request['slug']}'");
+    if ($db->mysqli->affected_rows >= 1) {
+        $_SESSION['success_msg'] = '<div class="col-lg-12">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="fa fa-check"></i> <strong>Gagal tersimpan!</strong> Article ' . $request['title'] . ' sudah ada.
+            </div>
+        </div>';
+
+        echo("<script>location.href='$baseURL/admin/?page=articles';</script>");
+    }
+
     $db = new Database();
     $db->insert('articles', $request);
 
@@ -49,7 +63,7 @@ if (isset($_POST['edit'])) {
 
     $db = new Database();
     $db->select('articles', '*', "id='$id'");
-    $article = mysqli_fetch_array($db->sql);
+    $article = mysqli_fetch_array($db->result);
 
     $file = $article['thumbnail'];
     if ($_FILES['thumbnail']['name'] != '') {
@@ -65,6 +79,20 @@ if (isset($_POST['edit'])) {
         $file = $file_slug . '-' . time() . '.' . $ext;
         move_uploaded_file($file_temp, '../public/images/article/' . $file);
         $request['thumbnail'] = $file;
+    }
+
+    // Check Duplicate
+    $db = new Database();
+    $db->select('articles', '*', "title='{$request['title']}' OR slug='{$request['slug']}'");
+    if ($db->mysqli->affected_rows >= 1) {
+        $_SESSION['success_msg'] = '<div class="col-lg-12">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="fa fa-check"></i> <strong>Gagal tersimpan!</strong> Article ' . $request['title'] . ' sudah ada.
+            </div>
+        </div>';
+
+        echo("<script>location.href='$baseURL/admin/?page=articles';</script>");
     }
 
     $db = new Database();
@@ -87,7 +115,7 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
 
     $db = new Database();
     $db->select('articles', '*', "id='$id'");
-    $result = mysqli_fetch_array($db->sql);
+    $result = mysqli_fetch_array($db->result);
 
     $db->delete('articles', "id='$id'");
 

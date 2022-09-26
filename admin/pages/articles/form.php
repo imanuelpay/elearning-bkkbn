@@ -6,14 +6,14 @@ $db->select_custom(
     '*',
     "WHERE status=1"
 );
-$categories = $db->sql;
+$categories = $db->result;
 
 if ((isset($_GET['edit']) && isset($_GET['id']))) {
     $id = $_GET['id'];
 
     $db = new Database();
     $db->select('articles', '*', "id='$id'");
-    $article = mysqli_fetch_array($db->sql);
+    $article = mysqli_fetch_array($db->result);
 }
 ?>
 <div class="main-content">

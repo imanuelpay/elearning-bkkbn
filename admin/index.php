@@ -15,13 +15,13 @@ if (isset($_GET['logout_admin'])) {
 $db = new Database();
 $db->select('menu', '*', 'status=1');
 $result_menu = [];
-while ($row = mysqli_fetch_array($db->sql)) {
+while ($row = mysqli_fetch_array($db->result)) {
     $result_menu[] = $row;
 }
 
 $db = new Database();
 $db->select('admin', '*', "id='{$_SESSION['admin_id']}'");
-$adminLogin = mysqli_fetch_array($db->sql);
+$adminLogin = mysqli_fetch_array($db->result);
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +40,10 @@ $adminLogin = mysqli_fetch_array($db->sql);
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
 
-        if ($page == 'articles' || $page == 'admin') {
+        if ($page == 'articles' || $page == 'admin' || $page == 'users' || $page == 'banner' || $page == 'announcements') {
             echo '<link rel="stylesheet" href="../assets/modules/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="../assets/modules/chocolat/dist/css/chocolat.css">';
-        } elseif ($page == 'article-form' || $page == 'admin-form') {
+        } elseif ($page == 'article-form' || $page == 'admin-form' || $page == 'user-form' || $page == 'banner-form' || $page == 'announcement-form') {
             echo '<link rel="stylesheet" href="../assets/modules/summernote/summernote-bs4.css">
   <link rel="stylesheet" href="../assets/modules/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="../assets/modules/chocolat/dist/css/chocolat.css">';
@@ -99,6 +99,18 @@ $adminLogin = mysqli_fetch_array($db->sql);
                 include './pages/admin/action.php';
             } elseif ($page == 'admin-form') {
                 include './pages/admin/form.php';
+            } elseif ($page == 'user-action') {
+                include './pages/users/action.php';
+            } elseif ($page == 'user-form') {
+                include './pages/users/form.php';
+            } elseif ($page == 'banner-action') {
+                include './pages/banner/action.php';
+            } elseif ($page == 'banner-form') {
+                include './pages/banner/form.php';
+            } elseif ($page == 'announcement-action') {
+                include './pages/announcements/action.php';
+            } elseif ($page == 'announcement-form') {
+                include './pages/announcements/form.php';
             }
         } else {
             include './pages/home/index.php';
@@ -170,10 +182,10 @@ $adminLogin = mysqli_fetch_array($db->sql);
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 
-    if ($page == 'articles' || $page == 'admin') {
+    if ($page == 'articles' || $page == 'admin' || $page == 'users' || $page == 'banner' || $page == 'announcements') {
         echo '<script src="../assets/modules/select2/dist/js/select2.full.min.js"></script>
 <script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>';
-    } elseif ($page == 'article-form' || $page == 'admin-form') {
+    } elseif ($page == 'article-form' || $page == 'admin-form' || $page == 'user-form' || $page == 'banner-form' || $page == 'announcement-form') {
         echo '<script src="../assets/modules/summernote/summernote-bs4.js"></script>
           <script src="../assets/modules/select2/dist/js/select2.full.min.js"></script>
           <script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>

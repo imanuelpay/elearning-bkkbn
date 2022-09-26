@@ -10,7 +10,7 @@ $previous = $page - 1;
 $next = $page + 1;
 
 $a->select('categories');
-$total_data = mysqli_num_rows($a->sql);
+$total_data = mysqli_num_rows($a->result);
 $total_page = ceil($total_data / $limit);
 
 $a->select_custom(
@@ -19,7 +19,7 @@ $a->select_custom(
     "ORDER BY name LIMIT $page_start, $limit"
 );
 
-$result = $a->sql;
+$result = $a->result;
 
 
 if ((isset($_GET['edit']) && isset($_GET['id']))) {
@@ -27,7 +27,7 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
 
     $db = new Database();
     $db->select('categories', '*', "id='$id'");
-    $category = mysqli_fetch_array($db->sql);
+    $category = mysqli_fetch_array($db->result);
 }
 ?>
 <div class="main-content">

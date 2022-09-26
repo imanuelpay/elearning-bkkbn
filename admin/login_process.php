@@ -13,8 +13,8 @@ if (isset($_POST['login'])) {
     $password = $db->mysqli->real_escape_string(cleanData($_POST['password']));
 
     $db->select_custom('admin', '*', "WHERE email='$email'");
-    $cek = mysqli_num_rows($db->sql);
-    $data = mysqli_fetch_array($db->sql);
+    $cek = mysqli_num_rows(result: $db->result);
+    $data = mysqli_fetch_array($db->result);
 
     if ($cek > 0) {
         if (password_verify($password, $data['password']) && $data['status'] == 1) {

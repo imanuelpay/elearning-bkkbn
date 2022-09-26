@@ -6,11 +6,11 @@
                 <div class="col-lg-8">
                     <div class="header-contact text-lg-left text-center">
                         <ul>
-                            <li><img src="./assets/user/images/all-icon/call.png"
+                            <li><img src="../assets/user/images/all-icon/call.png"
                                      alt="icon"><span>(124) 123 675 598</span></li>
-                            <li><img src="./assets/user/images/all-icon/email.png"
+                            <li><img src="../assets/user/images/all-icon/email.png"
                                      alt="icon"><span>info@yourmail.com</span></li>
-                            <li><img src="./assets/user/images/all-icon/map.png" alt="icon"><span>127/5 Mark street, New york</span>
+                            <li><img src="../assets/user/images/all-icon/map.png" alt="icon"><span>127/5 Mark street, New york</span>
                             </li>
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                 <div class="col-lg-11 col-md-11 col-sm-10 col-10">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="index-3.html">
-                            <img src="./assets/user/images/logo.png" alt="Logo" width="100">
+                            <img src="../assets/user/images/logo.png" alt="Logo" width="100">
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

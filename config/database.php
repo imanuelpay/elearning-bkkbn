@@ -6,12 +6,12 @@ require_once 'helpers.php';
 class Database
 {
     public mysqli|string $mysqli = '';
-    public $sql;
+    public $result;
+    private string $sql;
     private string $host = DB_HOST;
     private string $dbname = DB_NAME;
     private string $username = DB_USER;
     private string $password = DB_PASS;
-    private $result = array();
 
     public function __construct()
     {
@@ -76,7 +76,7 @@ class Database
             $sql = "SELECT $rows FROM $table";
         }
 
-        $this->sql = $this->mysqli->query($sql);
+        $this->result = $this->mysqli->query($sql);
     }
 
     public function select_custom($table, $rows = "*", $query = null): void
@@ -87,7 +87,7 @@ class Database
             $sql = "SELECT $rows FROM $table";
         }
 //        echo $sql;
-        $this->sql = $this->mysqli->query($sql);
+        $this->result = $this->mysqli->query($sql);
     }
 
     public function __destruct()

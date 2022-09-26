@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-about mt-40">
                         <div class="logo">
-                            <a href="#"><img src="./assets/user/images/logo-2.png" alt="Logo"></a>
+                            <a href="#"><img src="../assets/user/images/logo-2.png" alt="Logo"></a>
                         </div>
                         <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id
                             elit. Duis sed odio sit amet nibh vulputate.</p>

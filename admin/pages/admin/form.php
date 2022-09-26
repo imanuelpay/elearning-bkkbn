@@ -4,7 +4,7 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
 
     $db = new Database();
     $db->select('admin', '*', "id='$id'");
-    $admin = mysqli_fetch_array($db->sql);
+    $admin = mysqli_fetch_array($db->result);
 }
 ?>
 
@@ -12,14 +12,14 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
     <section class="section">
         <div class="section-header">
             <div class="section-header-back">
-                <a href="?page=articles" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                <a href="?page=admin" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1><?= (isset($_GET['edit']) && isset($_GET['id'])) ? 'Edit Administrator' : 'Create New Administrator ' ?></h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="?page=articles">Administrator</a></div>
+                <div class="breadcrumb-item"><a href="?page=admin">Administrator</a></div>
                 <div class="breadcrumb-item"><?= (isset($_GET['edit']) && isset($_GET['id'])) ? 'Edit ' : 'Add ' ?>
-                    Article
+                    Administrator
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
                                         <button class="btn btn-success"
                                                 name="<?= (isset($_GET['edit']) && isset($_GET['id'])) ? 'edit' : 'add' ?>">
                                             <?= (isset($_GET['edit']) && isset($_GET['id'])) ? 'Edit ' : 'Add ' ?>
-                                            Article
+                                            Admin
                                         </button>
                                     </div>
                                 </div>
