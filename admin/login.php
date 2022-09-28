@@ -1,5 +1,11 @@
 <?php
+include '../config/config.php';
 session_start();
+
+$baseURL = base_url;
+if (isset($_SESSION['login_admin'])) {
+    echo("<script>location.href='$baseURL/admin/';</script>");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

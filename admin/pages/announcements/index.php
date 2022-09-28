@@ -99,7 +99,6 @@ $categories = $db->result;
                                     <tr>
                                         <th>No</th>
                                         <th>Title</th>
-                                        <th>Content</th>
                                         <th>Author</th>
                                         <th>Created At</th>
                                         <th>Status</th>
@@ -129,9 +128,6 @@ $categories = $db->result;
                                                     <i class="fa fa-trash"></i>
                                                     Trash</a>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <?= $announcement['category'] ?>
                                         </td>
                                         <td>
                                             <img alt="image" src="../public/images/admin/<?= $announcement['avatar'] ?>"

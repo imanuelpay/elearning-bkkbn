@@ -47,6 +47,10 @@ $adminLogin = mysqli_fetch_array($db->result);
             echo '<link rel="stylesheet" href="../assets/modules/summernote/summernote-bs4.css">
   <link rel="stylesheet" href="../assets/modules/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="../assets/modules/chocolat/dist/css/chocolat.css">';
+        } elseif ($page == 'home') {
+            echo '<link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="../assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="../assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css">';
         }
     }
     ?>
@@ -91,6 +95,8 @@ $adminLogin = mysqli_fetch_array($db->result);
 
             if ($page == 'category-action') {
                 include './pages/categories/action.php';
+            } elseif ($page == 'home-action') {
+                include './pages/home/action.php';
             } elseif ($page == 'article-action') {
                 include './pages/articles/action.php';
             } elseif ($page == 'article-form') {
@@ -202,6 +208,9 @@ if (isset($_GET['page'])) {
           success_callback: null          // Default: null
         });
         </script>';
+    } elseif ($page == 'home') {
+        echo '<script src="../assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+  <script src="../assets/js/page/components-user.js"></script>';
     }
 }
 ?>

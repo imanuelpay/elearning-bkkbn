@@ -1,50 +1,83 @@
+<?php
+$db = new Database();
+
+// Banner Data
+$db->select_custom(
+    'banner',
+    '*',
+    "WHERE status=1 ORDER BY created_at DESC"
+);
+$data_banner = $db->result;
+
+// Announcement Data
+$db->select_custom(
+    'announcements, admin',
+    'announcements.*, admin.name AS created_by, admin.photo AS avatar',
+    "WHERE announcements.created_by=admin.id AND announcements.status=1 ORDER BY announcements.created_at DESC LIMIT 3"
+);
+$data_announcement = $db->result;
+
+// Total Announcement
+$db->select_custom(
+    'announcements',
+    '*',
+    "WHERE status=1"
+);
+$total_announcement = mysqli_num_rows($db->result);
+
+// Article Data
+$db->select_custom(
+    'articles, admin',
+    'articles.*, admin.name AS created_by, admin.photo AS avatar',
+    "WHERE articles.created_by=admin.id AND articles.status=1 ORDER BY articles.created_at DESC LIMIT 1"
+);
+$data_article1 = $db->result;
+
+$db->select_custom(
+    'articles, admin',
+    'articles.*, admin.name AS created_by, admin.photo AS avatar',
+    "WHERE articles.created_by=admin.id AND articles.status=1 ORDER BY articles.created_at DESC LIMIT 3 OFFSET 1"
+);
+$data_article2 = $db->result;
+
+// Total Article
+$db->select_custom(
+    'articles',
+    '*',
+    "WHERE status=1"
+);
+$total_article = mysqli_num_rows($db->result);
+
+// Total User
+$db->select_custom(
+    'user',
+    '*',
+    "WHERE status=1"
+);
+$total_user = mysqli_num_rows($db->result);
+?>
 <!--====== SLIDER PART START ======-->
 
 <section id="slider-part" class="slider-active">
-    <div class="single-slider slider-2 bg_cover" style="background-image: url(../assets/user/images/slider/s-2.jpg)"
-         data-overlay="4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 col-lg-10">
-                    <div class="slider-cont">
-                        <h1 data-animation="bounceInLeft" data-delay="1s">More than 5,000+ courses for develop your
-                            skill</h1>
-                        <a data-animation="fadeInUp" data-delay="1.3s" href="#" class="main-btn">Start Trial now</a>
+    <?php
+    while ($banner = mysqli_fetch_array($data_banner)) {
+        ?>
+        <div class="single-slider slider-2 bg_cover"
+             style="background-image: url(../public/images/banner/<?= $banner['photo'] ?>)"
+             data-overlay="4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-9 col-lg-10">
+                        <div class="slider-cont">
+                            <h1 data-animation="bounceInLeft" data-delay="1s"><?= $banner['title'] ?></h1>
+                            <a data-animation="fadeInUp" data-delay="1.3s" href="<?= $banner['link'] ?>"
+                               class="main-btn">Baca selanjutnya</a>
+                        </div>
                     </div>
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div> <!-- single slider -->
-
-    <div class="single-slider slider-2 bg_cover" style="background-image: url(../assets/user/images/slider/s-3.jpg)"
-         data-overlay="4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 col-lg-10">
-                    <div class="slider-cont">
-                        <h1 data-animation="bounceInLeft" data-delay="1s">More than 5,000+ courses for develop your
-                            skill</h1>
-                        <a data-animation="fadeInUp" data-delay="1.3s" href="#" class="main-btn">Start Trial now</a>
-                    </div>
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div> <!-- single slider -->
-
-    <div class="single-slider slider-2 bg_cover" style="background-image: url(../assets/user/images/slider/s-1.jpg)"
-         data-overlay="4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 col-lg-10">
-                    <div class="slider-cont">
-                        <h1 data-animation="bounceInLeft" data-delay="1s">More than 5,000+ courses for develop your
-                            skill</h1>
-                        <a data-animation="fadeInUp" data-delay="1.3s" href="#" class="main-btn">Start Trial now</a>
-                    </div>
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div> <!-- single slider -->
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- single slider -->
+    <?php } ?>
 </section>
 
 <!--====== SLIDER PART ENDS ======-->

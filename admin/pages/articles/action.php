@@ -81,24 +81,10 @@ if (isset($_POST['edit'])) {
         $request['thumbnail'] = $file;
     }
 
-    // Check Duplicate
-    $db = new Database();
-    $db->select('articles', '*', "title='{$request['title']}' OR slug='{$request['slug']}'");
-    if ($db->mysqli->affected_rows >= 1) {
-        $_SESSION['success_msg'] = '<div class="col-lg-12">
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <i class="fa fa-check"></i> <strong>Gagal tersimpan!</strong> Article ' . $request['title'] . ' sudah ada.
-            </div>
-        </div>';
-
-        echo("<script>location.href='$baseURL/admin/?page=articles';</script>");
-    }
-
     $db = new Database();
     $db->update('articles', $request, "id='$id'");
 
-    if ($db->mysqli->affected_rows >= 1) {
+    if ($db->mysqli->affected_rows >= 0) {
         $_SESSION['success_msg'] = '<div class="col-lg-12">
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

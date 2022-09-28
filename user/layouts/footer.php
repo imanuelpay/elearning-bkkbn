@@ -5,15 +5,21 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-about mt-40">
                         <div class="logo">
-                            <a href="#"><img src="../assets/user/images/logo-2.png" alt="Logo"></a>
+                            <a href="#"><img src="../assets/img/<?= $info['logo'] ?>" alt="Logo"
+                                             style="filter: invert(100%) sepia(97%) saturate(0%) hue-rotate(359deg) brightness(104%) contrast(104%)"></a>
                         </div>
                         <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id
                             elit. Duis sed odio sit amet nibh vulputate.</p>
                         <ul class="mt-20">
-                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://facebook.com/<?= $info['facebook'] ?>"><i class="fa fa-facebook-f"></i></a>
+                            </li>
+                            <li><a href="https://twitter.com/<?= $info['twitter'] ?>"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="https://instagram.com/<?= $info['instagram'] ?>"><i
+                                            class="fa fa-instagram"></i></a>
+                            </li>
+                            <li><a href="https://youtube.com/<?= $info['youtube'] ?>"><i class="fa fa-youtube-play"></i></a>
+                            </li>
                         </ul>
                     </div> <!-- footer about -->
                 </div>
@@ -63,7 +69,7 @@
                                     <i class="fa fa-home"></i>
                                 </div>
                                 <div class="cont">
-                                    <p>143 castle road 517 district, kiyev port south Canada</p>
+                                    <p><?= $info['address'] ?></p>
                                 </div>
                             </li>
                             <li>
@@ -71,7 +77,7 @@
                                     <i class="fa fa-phone"></i>
                                 </div>
                                 <div class="cont">
-                                    <p>+3 123 456 789</p>
+                                    <p><?= $info['phone'] ?></p>
                                 </div>
                             </li>
                             <li>
@@ -79,7 +85,7 @@
                                     <i class="fa fa-envelope-o"></i>
                                 </div>
                                 <div class="cont">
-                                    <p>info@yourmail.com</p>
+                                    <p><?= $info['email'] ?></p>
                                 </div>
                             </li>
                         </ul>
@@ -94,7 +100,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright text-md-left text-center pt-15">
-                        <p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
+                        <p>Imanuel Pay</p>
                     </div>
                 </div>
                 <div class="col-md-4">

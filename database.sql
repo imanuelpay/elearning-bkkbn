@@ -95,35 +95,37 @@ CREATE TABLE announcements
 
 CREATE TABLE banner
 (
-    id         varchar(32) not null primary key,
-    title      text        not null unique,
-    photo varchar(100) not null ,
-    link       longtext             default null,
-    status     tinyint(1)           default 0,
-    created_at timestamp   not null default current_timestamp(),
-    updated_at timestamp   null     default null on update current_timestamp()
+    id         varchar(32)  not null primary key,
+    title      text         not null unique,
+    photo      varchar(100) not null,
+    link       longtext              default null,
+    status     tinyint(1)            default 0,
+    created_at timestamp    not null default current_timestamp(),
+    updated_at timestamp    null     default null on update current_timestamp()
 );
-
-drop table banner;
 
 CREATE TABLE website_info
 (
-    id          varchar(32) not null primary key,
-    name        text        not null unique,
-    description longtext             default null,
-    phone       varchar(30)          default null,
-    email       varchar(200)         default null,
-    address     text                 default null,
-    facebook    varchar(200)         default null,
-    instagram   varchar(200)         default null,
-    twitter     varchar(200)         default null,
-    youtube     varchar(200)         default null,
-    tiktok      varchar(200)         default null,
-    logo        varchar(200)         default null,
-    status      tinyint(1)           default 0,
-    created_at  timestamp   not null default current_timestamp(),
-    updated_at  timestamp   null     default null on update current_timestamp()
+    id           int(11)   not null auto_increment primary key,
+    name         text      not null,
+    description  longtext           default null,
+    phone        varchar(30)        default null,
+    email        varchar(200)       default null,
+    address      text               default null,
+    facebook     varchar(200)       default null,
+    instagram    varchar(200)       default null,
+    twitter      varchar(200)       default null,
+    youtube      varchar(200)       default null,
+    tiktok       varchar(200)       default null,
+    logo         varchar(200)       default 'logo.png',
+    favicon      varchar(200)       default 'favicon.png',
+    user_display tinyint(1)         default 1,
+    status       tinyint(1)         default 1,
+    created_at   timestamp not null default current_timestamp(),
+    updated_at   timestamp null     default null on update current_timestamp()
 );
+
+drop table website_info;
 
 CREATE TABLE courses
 (
@@ -227,13 +229,18 @@ CREATE TABLE user_exam_enroll
 );
 
 insert into menu
-values (null, ' Categories', 'categories', 'fa-layer-group', 1),
+values (null, ' Home', 'home', 'fa-home', 1),
+       (null, ' Categories', 'categories', 'fa-layer-group', 1),
        (null, ' Articles', 'articles', 'fa-file', 1);
 
-insert into menu values (null, ' Admin', 'admin', 'fa-user-tie', 1);
-insert into menu values (null, ' Users', 'users', 'fa-users', 1);
-insert into menu values (null, ' Banner', 'banner', 'fa-paper-plane', 1);
-insert into menu values (null, ' Announcements', 'announcements', 'fa-info-circle', 1);
+insert into menu
+values (null, ' Admin', 'admin', 'fa-user-tie', 1);
+insert into menu
+values (null, ' Users', 'users', 'fa-users', 1);
+insert into menu
+values (null, ' Banner', 'banner', 'fa-paper-plane', 1);
+insert into menu
+values (null, ' Announcements', 'announcements', 'fa-info-circle', 1);
 
 INSERT INTO `admin` (`id`, `name`, `email`, `username`, `password`, `photo`, `status`, `created_at`, `updated_at`)
 VALUES ('ffdd05cc-88c1-4f39-9eac-7c49d772', 'Administrator', 'admin@admin.com', 'admin',

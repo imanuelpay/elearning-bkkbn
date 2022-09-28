@@ -7,10 +7,11 @@
                     <div class="header-contact text-lg-left text-center">
                         <ul>
                             <li><img src="../assets/user/images/all-icon/call.png"
-                                     alt="icon"><span>(124) 123 675 598</span></li>
+                                     alt="icon"><span><?= $info['phone'] ?></span></li>
                             <li><img src="../assets/user/images/all-icon/email.png"
-                                     alt="icon"><span>info@yourmail.com</span></li>
-                            <li><img src="../assets/user/images/all-icon/map.png" alt="icon"><span>127/5 Mark street, New york</span>
+                                     alt="icon"><span><?= $info['email'] ?></span></li>
+                            <li><img src="../assets/user/images/all-icon/map.png" alt="icon">
+                                <span><?= $info['address'] ?></span>
                             </li>
                         </ul>
                     </div>
@@ -18,10 +19,15 @@
                 <div class="col-lg-4">
                     <div class="header-social text-lg-right text-center">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://facebook.com/<?= $info['facebook'] ?>"><i class="fa fa-facebook-f"></i></a>
+                            </li>
+                            <li><a href="https://twitter.com/<?= $info['twitter'] ?>"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="https://instagram.com/<?= $info['instagram'] ?>"><i
+                                            class="fa fa-instagram"></i></a>
+                            </li>
+                            <li><a href="https://youtube.com/<?= $info['youtube'] ?>"><i class="fa fa-youtube-play"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -35,7 +41,7 @@
                 <div class="col-lg-11 col-md-11 col-sm-10 col-10">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="index-3.html">
-                            <img src="../assets/user/images/logo.png" alt="Logo" width="100">
+                            <img src="../assets/img/<?= $info['logo'] ?>" alt="Logo" width="100">
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

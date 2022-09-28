@@ -4,6 +4,9 @@ require_once '../config/mail.php';
 session_start();
 
 $baseURL = base_url;
+$db = new Database();
+$db->select_custom('website_info', '*', "LIMIT 1");
+$info = mysqli_fetch_array($db->result);
 ?>
 <!doctype html>
 <html lang="en">

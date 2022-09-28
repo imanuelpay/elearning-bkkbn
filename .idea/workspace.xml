@@ -5,50 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c2cf61c-1d2c-4eb7-98d4-4db1a030696c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098/storage_v2/_src_/schema/elearing_bkkbn.Au5hWw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ce22c2d-5cef-4dc0-a47f-bcf91fda7098/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/pages/home/action.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/eb224ae4-fc52-46ec-859c-ff93d3043060.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/eb224ae4-fc52-46ec-859c-ff93d3043060.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/login_process.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/login_process.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/admin/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/admin/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/admin/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/admin/form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/admin/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/announcements/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/announcements/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/announcements/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/announcements/form.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/announcements/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/announcements/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/articles/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/articles/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/articles/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/articles/form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/articles/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/articles/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/banner/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/banner/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/banner/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/banner/form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/banner/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/banner/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/pages/categories/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/categories/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/categories/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/categories/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/users/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/users/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/users/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/users/form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pages/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/users/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/pages/home/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pages/home/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/email.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/layouts/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/layouts/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/layouts/loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/layouts/loader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/pages/auth/action.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/pages/auth/action.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/pages/auth/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/pages/auth/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/pages/auth/verify.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/pages/auth/verify.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/pages/home/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/pages/home/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,7 +120,9 @@
       <workItem from="1664073890909" duration="9056000" />
       <workItem from="1664098288427" duration="3372000" />
       <workItem from="1664108367948" duration="2661000" />
-      <workItem from="1664158954172" duration="3566000" />
+      <workItem from="1664158954172" duration="4603000" />
+      <workItem from="1664208500650" duration="1895000" />
+      <workItem from="1664353577609" duration="17433000" />
     </task>
     <servers />
   </component>
