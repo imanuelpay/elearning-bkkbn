@@ -2,14 +2,13 @@
     <div class="footer-top pt-10 pb-70">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="footer-about mt-40">
                         <div class="logo">
-                            <a href="#"><img src="../assets/img/<?= $info['logo'] ?>" alt="Logo"
-                                             style="filter: invert(100%) sepia(97%) saturate(0%) hue-rotate(359deg) brightness(104%) contrast(104%)"></a>
+                            <a href="?halaman=beranda"><img src="../assets/img/<?= $info['logo'] ?>" alt="Logo"
+                                                            style="filter: brightness(0) invert(1);"></a>
                         </div>
-                        <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id
-                            elit. Duis sed odio sit amet nibh vulputate.</p>
+                        <p><?= $info['description'] ?></p>
                         <ul class="mt-20">
                             <li><a href="https://facebook.com/<?= $info['facebook'] ?>"><i class="fa fa-facebook-f"></i></a>
                             </li>
@@ -29,39 +28,19 @@
                             <h6>Sitemap</h6>
                         </div>
                         <ul>
-                            <li><a href="index-2.html"><i class="fa fa-angle-right"></i>Home</a></li>
-                            <li><a href="about.html"><i class="fa fa-angle-right"></i>About us</a></li>
-                            <li><a href="courses.html"><i class="fa fa-angle-right"></i>Courses</a></li>
-                            <li><a href="blog.html"><i class="fa fa-angle-right"></i>News</a></li>
-                            <li><a href="events.html"><i class="fa fa-angle-right"></i>Event</a></li>
+                            <li><a href="?halaman=beranda"><i class="fa fa-angle-right"></i>Beranda</a></li>
+                            <li><a href="?halaman=kontak"><i class="fa fa-angle-right"></i>Kontak</a></li>
                         </ul>
                         <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Gallery</a></li>
-                            <li><a href="shop.html"><i class="fa fa-angle-right"></i>Shop</a></li>
-                            <li><a href="teachers.html"><i class="fa fa-angle-right"></i>Teachers</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Support</a></li>
-                            <li><a href="contact.html"><i class="fa fa-angle-right"></i>Contact</a></li>
+                            <li><a href="?halaman=artikel"><i class="fa fa-angle-right"></i>Artikel</a></li>
+                            <li><a href="?halaman=pengumuman"><i class="fa fa-angle-right"></i>Pengumuman</a></li>
                         </ul>
                     </div> <!-- footer link -->
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="footer-link support mt-40">
-                        <div class="footer-title pb-25">
-                            <h6>Support</h6>
-                        </div>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>FAQS</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Privacy</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Policy</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Support</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Documentation</a></li>
-                        </ul>
-                    </div> <!-- support -->
-                </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="footer-address mt-40">
                         <div class="footer-title pb-25">
-                            <h6>Contact Us</h6>
+                            <h6>Kontak Kami</h6>
                         </div>
                         <ul>
                             <li>
@@ -100,7 +79,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright text-md-left text-center pt-15">
-                        <p>Imanuel Pay</p>
+                        <p>Copyright &copy; <?= date('Y') ?>. By Imanuel Pay</p>
                     </div>
                 </div>
                 <div class="col-md-4">

@@ -8,7 +8,8 @@ if (!isset($_SESSION['login_admin'])) {
 }
 
 if (isset($_GET['logout_admin'])) {
-    session_destroy();
+    unset($_SESSION['login_admin']);
+    unset($_SESSION['admin_id']);
     echo("<script>location.href='$baseURL/admin/login.php';</script>");
 }
 
@@ -22,6 +23,10 @@ while ($row = mysqli_fetch_array($db->result)) {
 $db = new Database();
 $db->select('admin', '*', "id='{$_SESSION['admin_id']}'");
 $adminLogin = mysqli_fetch_array($db->result);
+
+$db = new Database();
+$db->select_custom('website_info', '*', "LIMIT 1");
+$info = mysqli_fetch_array($db->result);
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +34,9 @@ $adminLogin = mysqli_fetch_array($db->result);
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Blank Page &mdash; Stisla</title>
+    <title><?= $info['name'] ?></title>
 
+    <link rel="shortcut icon" href="../assets/img/<?= $info['favicon'] ?>" type="image/png">
     <!-- General CSS Files -->
     <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
@@ -208,6 +214,22 @@ if (isset($_GET['page'])) {
           success_callback: null          // Default: null
         });
         </script>';
+        echo "<script>
+            $('.summernote').summernote({
+                disableGrammar: true,
+                spellCheck: false,
+                width: '100%',
+                height: '250',
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        </script>";
     } elseif ($page == 'home') {
         echo '<script src="../assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
   <script src="../assets/js/page/components-user.js"></script>';

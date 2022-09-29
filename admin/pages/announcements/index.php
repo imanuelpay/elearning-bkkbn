@@ -8,24 +8,24 @@ $i = $page_start + 1;
 $previous = $page - 1;
 $next = $page + 1;
 
-$query = "WHERE announcements.created_by=admin.id";
+$query = "";
 
 // Search
 if (isset($_POST['search'])) {
     $search = $_POST['q'];
-    $query .= " AND announcements.title LIKE '%$search%'";
+    $query .= "WHERE announcements.title LIKE '%$search%'";
 }
 
 // Announcement List
 $db = new Database();
-$db->select_custom('announcements, admin', "announcements.id", $query);
+$db->select_custom('announcements', "announcements.id", $query);
 $total_data = mysqli_num_rows($db->result);
 $total_page = ceil($total_data / $limit);
 
 $db->select_custom(
-    'announcements, admin',
+    'announcements LEFT JOIN admin ON announcements.created_by=admin.id',
     'announcements.*,  admin.name AS created_by, admin.photo AS avatar',
-    "$query ORDER BY created_at DESC LIMIT $page_start, $limit"
+    "$query ORDER BY announcements.created_at DESC LIMIT $page_start, $limit"
 );
 
 $announcements = $db->result;

@@ -48,7 +48,7 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
                                     <div class="col-sm-12 col-md-7">
                                         <textarea name="content"
-                                                  class="summernote-simple"><?= (isset($_GET['edit']) && isset($announcement)) ? $announcement['content'] : '' ?></textarea>
+                                                  class="summernote"><?= (isset($_GET['edit']) && isset($announcement)) ? $announcement['content'] : '' ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">

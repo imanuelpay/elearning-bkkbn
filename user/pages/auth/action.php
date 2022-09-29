@@ -84,7 +84,7 @@ if (isset($_GET['token']) && isset($_GET['verified'])) {
 
         $db = new Database();
         $db->update('user', $user, "id='{$data['id']}'");
-        if ($db->mysqli->affected_rows >= 1) {
+        if ($db->mysqli->affected_rows >= 0) {
             $_SESSION['success_msg'] = '<div class="contact-address mt-30">
                         <ul>
                         <li>
@@ -120,5 +120,56 @@ if (isset($_GET['token']) && isset($_GET['verified'])) {
                     </div>';
 
         echo("<script>location.href='$baseURL/user/?halaman=verifikasi-akun';</script>");
+    }
+}
+
+if (isset($_POST['login'])) {
+    $db = new Database();
+    $email = $db->mysqli->real_escape_string(cleanData($_POST['email']));
+    $password = $db->mysqli->real_escape_string(cleanData($_POST['password']));
+
+    $db->select_custom('user', '*', "WHERE email='$email'");
+    $cek = mysqli_num_rows(result: $db->result);
+    $data = mysqli_fetch_array($db->result);
+
+    if ($cek > 0) {
+        if (password_verify($password, $data['password']) && $data['status'] == 1) {
+            $_SESSION['login_user'] = true;
+            $_SESSION['user_id'] = $data['id'];
+
+            if (isset($_SESSION['redirect_login'])) {
+                echo("<script>location.href='$baseURL/user/?halaman={$_SESSION['redirect_login']}';</script>");
+            } else {
+                echo("<script>location.href='$baseURL/user';</script>");
+            }
+        } elseif ($data['status'] != 1) {
+            $_SESSION['success_msg'] = '<div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-remove"></i> <strong>Login Gagal!</strong> Akun tidak aktif, mohon hubungi admin.
+                </div>';
+
+            echo("<script>location.href='$baseURL/user';</script>");
+        } elseif ($data['is_verified'] != 1) {
+            $_SESSION['success_msg'] = '<div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-remove"></i> <strong>Login Gagal!</strong> Akun belum di verifikasi, mohon verifikasi email.
+                </div>';
+
+            echo("<script>location.href='$baseURL/user';</script>");
+        } else {
+            $_SESSION['success_msg'] = '<div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-remove"></i> <strong>Login Gagal!</strong> Mohon mengisi email dan password dengan benar.
+                </div>';
+
+            echo("<script>location.href='$baseURL/user';</script>");
+        }
+    } else {
+        $_SESSION['success_msg'] = '<div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-remove"></i> <strong>Login Gagal!</strong> Mohon mengisi email dan password dengan benar.
+                </div>';
+
+        echo("<script>location.href='$baseURL/user';</script>");
     }
 }

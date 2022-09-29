@@ -80,6 +80,12 @@ CREATE TABLE articles
     foreign key (category_id) references categories (id) on update cascade on delete set null
 );
 
+alter table articles
+    add foreign key (created_by) references admin (id) on update cascade on delete set null;
+alter table articles
+    add foreign key (updated_by) references admin (id) on update cascade on delete set null;
+
+
 CREATE TABLE announcements
 (
     id         varchar(32) not null primary key,
@@ -92,6 +98,11 @@ CREATE TABLE announcements
     created_at timestamp   not null default current_timestamp(),
     updated_at timestamp   null     default null on update current_timestamp()
 );
+
+alter table announcements
+    add foreign key (created_by) references admin (id) on update cascade on delete set null;
+alter table announcements
+    add foreign key (updated_by) references admin (id) on update cascade on delete set null;
 
 CREATE TABLE banner
 (

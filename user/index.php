@@ -7,6 +7,18 @@ $baseURL = base_url;
 $db = new Database();
 $db->select_custom('website_info', '*', "LIMIT 1");
 $info = mysqli_fetch_array($db->result);
+
+if (isset($_SESSION['login_user'])) {
+    $db = new Database();
+    $db->select('user U JOIN user_details UD ON U.id=UD.user_id', '*', "U.id='{$_SESSION['user_id']}'");
+    $userLogin = mysqli_fetch_array($db->result);
+}
+
+if (isset($_GET['logout_user'])) {
+    unset($_SESSION['login_user']);
+    unset($_SESSION['user_id']);
+    echo("<script>location.href='$baseURL/user';</script>");
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,10 +32,10 @@ $info = mysqli_fetch_array($db->result);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--====== Title ======-->
-    <title>Edubin - LMS Education HTML Template</title>
+    <title><?= $info['name'] ?></title>
 
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="../assets/user/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="../assets/img/<?= $info['favicon'] ?>" type="image/png">
 
     <!--====== Slick css ======-->
     <link rel="stylesheet" href="../assets/user/css/slick.css">
@@ -84,11 +96,39 @@ if (isset($_GET['halaman'])) {
         include './pages/auth/action.php';
     } elseif ($page == 'verifikasi-akun') {
         include './pages/auth/verify.php';
+    } elseif ($page == 'artikel') {
+        include './pages/article/index.php';
+    } elseif ($page == 'lihat-artikel') {
+        include './pages/article/single.php';
     }
 } else {
     include './pages/home/index.php';
 }
 ?>
+
+<div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="modalLogoutLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLogoutLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="bodyLogout">
+                <label id="logoutTitle"></label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                            class="fa fa-remove"></i>
+                    Batal
+                </button>
+                <a href="" class="btn btn-danger" id="linkLogout"><i class="fa fa-sign-out"></i> Keluar</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--====== FOOTER PART START ======-->
 

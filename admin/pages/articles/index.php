@@ -8,24 +8,24 @@ $i = $page_start + 1;
 $previous = $page - 1;
 $next = $page + 1;
 
-$query = "WHERE articles.category_id=categories.id AND articles.created_by=admin.id";
+$query = "";
 
 // Search
 if (isset($_POST['search'])) {
     $search = $_POST['q'];
-    $query .= " AND articles.title LIKE '%$search%'";
+    $query .= "WHERE articles.title LIKE '%$search%'";
 }
 
 // Article List
 $db = new Database();
-$db->select_custom('articles, categories, admin', "articles.id", $query);
+$db->select_custom('articles', "articles.id", $query);
 $total_data = mysqli_num_rows($db->result);
 $total_page = ceil($total_data / $limit);
 
 $db->select_custom(
-    'articles, categories, admin',
+    'articles LEFT JOIN categories ON articles.category_id=categories.id LEFT JOIN admin ON articles.created_by=admin.id',
     'articles.id, articles.title, articles.slug, categories.name AS category, articles.thumbnail, articles.created_at, articles.status, admin.name AS created_by, admin.photo AS avatar',
-    "$query ORDER BY created_at DESC LIMIT $page_start, $limit"
+    "$query ORDER BY articles.created_at DESC LIMIT $page_start, $limit"
 );
 
 $articles = $db->result;
