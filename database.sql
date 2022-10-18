@@ -43,8 +43,9 @@ CREATE TABLE user_details
     city          varchar(100),
     photo         varchar(100)                                default 'avatar.png',
     updated_at    timestamp   null                            default null on update current_timestamp(),
-    foreign key (user_id) references user (id)
+    foreign key (user_id) references user (id) on update cascade on delete cascade
 );
+
 
 CREATE TABLE menu
 (
@@ -98,6 +99,9 @@ CREATE TABLE announcements
     created_at timestamp   not null default current_timestamp(),
     updated_at timestamp   null     default null on update current_timestamp()
 );
+
+alter table announcements
+    add column photo varchar(100) default null AFTER content;
 
 alter table announcements
     add foreign key (created_by) references admin (id) on update cascade on delete set null;
@@ -257,5 +261,19 @@ INSERT INTO `admin` (`id`, `name`, `email`, `username`, `password`, `photo`, `st
 VALUES ('ffdd05cc-88c1-4f39-9eac-7c49d772', 'Administrator', 'admin@admin.com', 'admin',
         '$2y$10$v1EkK5gjURoJ6wrHZuw.neZqHvHqbMI1AmAyB9IPA4YwuUb3YiMai', 'administrator-1663201189.png', 1,
         '2022-09-14 13:58:29', '2022-09-15 00:49:47');
+
+create table contact
+(
+    id         varchar(32) primary key not null,
+    name       varchar(200)            not null,
+    email      varchar(200)            not null,
+    subject    text                    not null,
+    message    text                    not null,
+    reply      text,
+    reply_by   varchar(200),
+    status     varchar(100),
+    created_at timestamp               not null default current_timestamp(),
+    updated_at timestamp               null     default null on update current_timestamp()
+);
 
 drop database elearing_bkkbn;

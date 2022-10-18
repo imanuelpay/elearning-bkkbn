@@ -101,11 +101,23 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
                                         </div>
                                         <?= (isset($_GET['edit']) && isset($user)) ? '<div class="form-text text-muted">Kosongkan jika tidak ingin mengubah thumbnail.</div>' : '' ?>
                                     </div>
-
-                                    <?= (isset($_GET['edit']) && isset($user)) ? '<div class="gallery gallery-fw col-sm-12 col-md-3" data-item-height="250">
-                                        <div class="gallery-item" data-image="../public/images/user/' . $user['photo'] . '"
-                                                     data-title="' . $user['username'] . '"></div>
-                                    </div>' : '' ?>
+                                    <?php if (isset($_GET['edit']) && isset($user)) { ?>
+                                        <div class="gallery gallery-fw col-sm-12 col-md-3" data-item-height="250">
+                                            <?php if ($user['gender'] == 'Male' && $user['photo'] == 'avatar.png') { ?>
+                                                <div class="gallery-item"
+                                                     data-image="../public/images/user/avatar_male.png"
+                                                     data-title="<?= $user['username'] ?>"></div>
+                                            <?php } else if ($user['gender'] == 'Female' && $user['photo'] == 'avatar.png') { ?>
+                                                <div class="gallery-item"
+                                                     data-image="../public/images/user/avatar_female.png"
+                                                     data-title="<?= $user['username'] ?>"></div>
+                                            <?php } else { ?>
+                                                <div class="gallery-item"
+                                                     data-image="../public/images/user/<?= $user['photo'] ?>"
+                                                     data-title="<?= $user['username'] ?>"></div>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } ?>
                                 </div>
 
                                 <div class="form-group row mb-4">

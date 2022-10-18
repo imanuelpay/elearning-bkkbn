@@ -75,7 +75,7 @@
 
                             <?php if (isset($_SESSION['login_user'])) { ?>
                                 <li class="nav-item">
-                                    <a href="about.html">Akun Saya</a>
+                                    <a href="?halaman=akun-saya">Akun Saya</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#logout" data-toggle="modal" data-target="#modalLogout" onclick="

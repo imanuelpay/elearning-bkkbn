@@ -98,6 +98,7 @@ $categories = $db->result;
                                 <table class="table table-striped">
                                     <tr>
                                         <th>No</th>
+                                        <th>Photo</th>
                                         <th>Title</th>
                                         <th>Author</th>
                                         <th>Created At</th>
@@ -115,6 +116,13 @@ $categories = $db->result;
                                     ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
+                                        <td>
+                                            <div class="gallery">
+                                                <div class="gallery-item"
+                                                     data-image="../public/images/announcement/<?= $announcement['photo'] ?>"
+                                                     data-title="<?= $announcement['slug'] ?>"></div>
+                                            </div>
+                                        </td>
                                         <td><?= $announcement['title'] ?>
                                             <div class="table-links">
                                                 <a href="?page=announcement-form&id=<?= $announcement['id'] ?>&edit"

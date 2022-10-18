@@ -76,7 +76,7 @@ $categories = $db->result;
                                 </form>
                             </div> <!-- saidbar search -->
                             <div class="categories mt-30">
-                                <h4>Categories</h4>
+                                <h4>Kategori</h4>
                                 <ul>
                                     <li>
                                         <a href="?halaman=artikel">Semua</a>

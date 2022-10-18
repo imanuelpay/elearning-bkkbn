@@ -37,7 +37,7 @@ $total_page = ceil($total_data / $limit);
 $db->select_custom(
     'articles LEFT JOIN categories ON articles.category_id=categories.id LEFT JOIN admin ON articles.created_by=admin.id',
     'articles.*, admin.name AS created_by, categories.name AS category',
-    "$query AND articles.status=1 ORDER BY created_at DESC LIMIT $page_start, $limit"
+    "$query AND articles.status=1 ORDER BY articles.created_at DESC LIMIT $page_start, $limit"
 );
 
 $articles = $db->result;
@@ -86,15 +86,13 @@ $categories = $db->result;
                                     </a></li>
                                 <li><a href="#"><i class="fa fa-user"></i><?= $article['created_by'] ?></a></li>
                                 <li><a href="#"><i class="fa fa-tags"></i><?= $article['category'] ?></a></li>
-                            </ul>
-                            <p class="text-justify"><?php
-                                if (strlen($article['content']) > 350) {
-                                    echo substr(htmlspecialchars_decode($article['content']), 0, 350) . '.....';
-                                } else {
-                                    echo htmlspecialchars_decode($article['content']);
-                                }
-                                ?>
-                            </p>
+                            </ul><?php
+                            if (strlen($article['content']) > 350) {
+                                echo substr(htmlspecialchars_decode($article['content']), 0, 350) . '.....';
+                            } else {
+                                echo htmlspecialchars_decode($article['content']);
+                            }
+                            ?>
                         </div>
                     </div> <!-- singel blog -->
                 <?php } ?>

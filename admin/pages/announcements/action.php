@@ -10,6 +10,17 @@ if (isset($_POST['add'])) {
     $request['slug'] = textToSlug($request['title']);
     $request['created_by'] = $_SESSION['admin_id'];
 
+    if ($_FILES['photo']['name'] != '') {
+        $file_name = $_FILES['photo']['name'];
+        $file_temp = $_FILES['photo']['tmp_name'];
+        $file_slug = textToSlug($request['title']);
+
+        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+        $file = $file_slug . '-' . time() . '.' . $ext;
+        move_uploaded_file($file_temp, '../public/images/announcement/' . $file);
+        $request['photo'] = $file;
+    }
+
     // Check Duplicate
     $db = new Database();
     $db->select('announcements', '*', "title='{$request['title']}' OR slug='{$request['slug']}'");
@@ -51,6 +62,26 @@ if (isset($_POST['edit'])) {
     $request['updated_by'] = $_SESSION['admin_id'];
 
     $db = new Database();
+    $db->select('announcements', '*', "id='$id'");
+    $article = mysqli_fetch_array($db->result);
+
+    $file = $article['photo'];
+    if ($_FILES['photo']['name'] != '') {
+        $file_name = $_FILES['photo']['name'];
+        $file_temp = $_FILES['photo']['tmp_name'];
+        $file_slug = textToSlug($request['title']);
+
+        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+        if (is_writable('../public/images/announcement/' . $file)) {
+            unlink('../public/images/announcement/' . $file);
+        }
+
+        $file = $file_slug . '-' . time() . '.' . $ext;
+        move_uploaded_file($file_temp, '../public/images/announcement/' . $file);
+        $request['photo'] = $file;
+    }
+
+    $db = new Database();
     $db->update('announcements', $request, "id='$id'");
 
     if ($db->mysqli->affected_rows >= 0) {
@@ -73,6 +104,11 @@ if (isset($_GET['delete']) && isset($_GET['id'])) {
     $result = mysqli_fetch_array($db->result);
 
     $db->delete('announcements', "id='$id'");
+
+    if (is_writable('../public/images/announcement/' . $result['photo'])) {
+        unlink('../public/images/announcement/' . $result['photo']);
+    }
+
     if ($db->mysqli->affected_rows >= 1) {
         $_SESSION['success_msg'] = '<div class="col-lg-12">
             <div class="alert alert-success alert-dismissible" role="alert">

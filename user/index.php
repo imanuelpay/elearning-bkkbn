@@ -100,6 +100,14 @@ if (isset($_GET['halaman'])) {
         include './pages/article/index.php';
     } elseif ($page == 'lihat-artikel') {
         include './pages/article/single.php';
+    } elseif ($page == 'pengumuman') {
+        include './pages/announcement/index.php';
+    } elseif ($page == 'akun-saya' && isset($_SESSION['login_user'])) {
+        include './pages/profile/index.php';
+    } elseif ($page == 'kontak') {
+        include './pages/contact/index.php';
+    } elseif ($page == 'action-kontak') {
+        include './pages/contact/action.php';
     }
 } else {
     include './pages/home/index.php';

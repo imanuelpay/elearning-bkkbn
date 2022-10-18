@@ -109,9 +109,19 @@ $user_data = $db->result;
                                         <td><?= $no++ ?></td>
                                         <td>
                                             <div class="gallery circle">
-                                                <div class="gallery-item"
-                                                     data-image="../public/images/user/<?= $user['photo'] ?>"
-                                                     data-title="<?= $user['username'] ?>"></div>
+                                                <?php if ($user['gender'] == 'Male' && $user['photo'] == 'avatar.png') { ?>
+                                                    <div class="gallery-item"
+                                                         data-image="../public/images/user/avatar_male.png"
+                                                         data-title="<?= $user['username'] ?>"></div>
+                                                <?php } else if ($user['gender'] == 'Female' && $user['photo'] == 'avatar.png') { ?>
+                                                    <div class="gallery-item"
+                                                         data-image="../public/images/user/avatar_female.png"
+                                                         data-title="<?= $user['username'] ?>"></div>
+                                                <?php } else { ?>
+                                                    <div class="gallery-item"
+                                                         data-image="../public/images/user/<?= $user['photo'] ?>"
+                                                         data-title="<?= $user['username'] ?>"></div>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                         <td><?= $user['name'] ?>

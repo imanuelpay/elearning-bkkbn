@@ -1,5 +1,6 @@
 <?php
 require_once '../config/database.php';
+require_once '../config/mail.php';
 session_start();
 
 $baseURL = base_url;

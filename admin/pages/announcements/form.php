@@ -52,6 +52,22 @@ if ((isset($_GET['edit']) && isset($_GET['id']))) {
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
+                                    <div class="col-sm-12 col-md-3">
+                                        <div id="image-preview" class="image-preview">
+                                            <label for="image-upload" id="image-label">Choose File</label>
+                                            <input type="file" name="photo" id="image-upload" accept="image/*"/>
+                                        </div>
+                                        <?= (isset($_GET['edit']) && isset($announcement)) ? '<div class="form-text text-muted">Kosongkan jika tidak ingin mengubah foto.</div>' : '' ?>
+                                    </div>
+
+                                    <?= (isset($_GET['edit']) && isset($announcement)) ? '<div class="gallery gallery-fw col-sm-12 col-md-3" data-item-height="250">
+                                        <div class="gallery-item" data-image="../public/images/announcement/' . $announcement['photo'] . '"
+                                                     data-title="' . $announcement['slug'] . '"></div>
+                                    </div>' : '' ?>
+
+                                </div>
+                                <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
                                     <div class="col-sm-12 col-md-7 mt-1">
                                         <div class="custom-control custom-radio custom-control-inline">

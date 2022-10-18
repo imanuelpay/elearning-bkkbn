@@ -67,6 +67,7 @@ if (isset($_POST['register'])) {
     }
 }
 
+// Verification
 $url = base_url . '/user';
 if (isset($_GET['token']) && isset($_GET['verified'])) {
     $token = $_GET['token'];

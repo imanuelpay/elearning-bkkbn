@@ -11,9 +11,9 @@ $data_banner = $db->result;
 
 // Announcement Data
 $db->select_custom(
-    'announcements, admin',
+    'announcements LEFT JOIN admin ON announcements.created_by=admin.id',
     'announcements.*, admin.name AS created_by, admin.photo AS avatar',
-    "WHERE announcements.created_by=admin.id AND announcements.status=1 ORDER BY announcements.created_at DESC LIMIT 3"
+    "WHERE announcements.status=1 ORDER BY announcements.created_at DESC LIMIT 3"
 );
 $data_announcement = $db->result;
 
@@ -43,16 +43,16 @@ $total_course = mysqli_num_rows($db->result);
 
 // Article Data
 $db->select_custom(
-    'articles, admin',
+    'articles LEFT JOIN categories ON articles.category_id=categories.id LEFT JOIN admin ON articles.created_by=admin.id',
     'articles.*, admin.name AS created_by, admin.photo AS avatar',
-    "WHERE articles.created_by=admin.id AND articles.status=1 ORDER BY articles.created_at DESC LIMIT 1"
+    "WHERE articles.status=1 ORDER BY articles.created_at DESC LIMIT 1"
 );
 $data_article1 = $db->result;
 
 $db->select_custom(
-    'articles, admin',
+    'articles LEFT JOIN categories ON articles.category_id=categories.id LEFT JOIN admin ON articles.created_by=admin.id',
     'articles.*, admin.name AS created_by, admin.photo AS avatar',
-    "WHERE articles.created_by=admin.id AND articles.status=1 ORDER BY articles.created_at DESC LIMIT 3 OFFSET 1"
+    "WHERE articles.status=1 ORDER BY articles.created_at DESC LIMIT 3 OFFSET 1"
 );
 $data_article2 = $db->result;
 
@@ -100,31 +100,42 @@ $total_user = mysqli_num_rows($db->result);
 
 <!--====== CATEGORY PART START ======-->
 
-<section id="category-2-part">
+<section id="category-2-part" class="gray-bg pb-30">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="about-event mt-30">
-                    <div class="event-title">
-                        <h3>Pengumuman Terbaru</h3>
-                    </div> <!-- event title -->
-                    <ul>
-                        <?php
-                        while ($announcement = mysqli_fetch_array($data_announcement)) {
-                            $created_at = date_create($announcement['created_at']);
-                            ?>
-                            <li>
-                                <div class="singel-event">
-                                    <span><i class="fa fa-calendar"></i> <?= date_format($created_at, "l, d F Y  h:i:s A") ?></span>
-                                    <h4><?= $announcement['title'] ?></h4>
-                                    <span><i class="fa fa-user"></i> <?= $announcement['created_by'] ?></span>
-                                </div>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div> <!-- event 2 -->
+            <div class="col-lg-7">
+                <div class="section-title mt-50">
+                    <h5>Pengumuman</h5>
+                    <h3>Pengumuman Terbaru</h3>
+                </div>
+
+                <?php
+                while ($announcement = mysqli_fetch_array($data_announcement)) {
+                    $created_at = date_create($announcement['created_at']);
+                    ?>
+                    <div class="singel-event-list mt-30">
+                        <div class="event-thum">
+                            <img src="../public/images/announcement/<?= $announcement['photo'] ?>"
+                                 alt="<?= $announcement['slug'] ?>">
+                        </div>
+                        <div class="event-cont">
+                            <span><i class="fa fa-calendar"></i> <?= date_format($created_at, "l, d F Y") ?></span>
+                            <h4><?= $announcement['title'] ?></h4>
+                            <span><i class="fa fa-clock-o"></i> <?= date_format($created_at, "h:i:s A") ?></span>
+                            <span><i class="fa fa-user"></i> Oleh <?= $announcement['created_by'] ?></span>
+                            <?php
+                            if (strlen($announcement['content']) > 80) {
+                                echo substr(htmlspecialchars_decode($announcement['content']), 0, 80) . '.....';
+                            } else {
+                                echo htmlspecialchars_decode($announcement['content']);
+                            } ?>
+                        </div>
+                    </div>
+                <?php } ?>
+
             </div>
-            <div class="col-lg-5 offset-lg-1">
+
+            <div class="col-lg-5">
                 <?php if (!isset($_SESSION['login_user'])) { ?>
                     <div class="category-form">
                         <div class="form-title text-center">
@@ -135,8 +146,10 @@ $total_user = mysqli_num_rows($db->result);
                             <form method="post" action="?halaman=action-auth" data-toggle="validator">
                                 <div class="singel-form">
                                     <?php
-                                    if (isset($_SESSION['success_msg'])) {
+                                    if (isset($_GET['redirect'])) {
                                         echo $_SESSION['success_msg'];
+                                    } else {
+                                        unset($_SESSION['redirect_login']);
                                         unset($_SESSION['success_msg']);
                                     }
                                     ?>
@@ -232,7 +245,7 @@ $total_user = mysqli_num_rows($db->result);
 
     <!--====== COURSE PART START ======-->
 
-    <section id="course-part" class="pt-50 pb-10">
+    <section id="course-part" class="pt-30 pb-10">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -290,7 +303,7 @@ $total_user = mysqli_num_rows($db->result);
 <?php } ?>
 <!--====== NEWS PART START ======-->
 
-<section id="news-part" class="pt-20 pb-50">
+<section id="news-part" class="pt-30 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
